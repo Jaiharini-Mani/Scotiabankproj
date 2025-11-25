@@ -58,7 +58,8 @@ public class HomePage {
 	}
 
 	public void openChequingAccount() {
-
+		   Hooks hooks = new Hooks();
+		    hooks.closeCookiesIfPresent(driver);
 		openAccountButton.click();
 	}
 

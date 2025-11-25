@@ -11,6 +11,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.fdmgroup.stepdefinitions.Hooks;
+
 public class SignInPage {
 
 	WebDriver driver;
@@ -52,6 +54,8 @@ public class SignInPage {
 	
 	
 	public void clickSignInButton() {
+	    Hooks hooks = new Hooks();
+	    hooks.closeCookiesIfPresent(driver);
 		signInbutton.click();
 	}
 	

@@ -33,15 +33,24 @@ public class BankAccNavigation_Stedef {
 
 	@When("user hovers mouse over the {string} menu option")
 	public void user_hovers_mouse_over_the_menu_option(String menu) throws InterruptedException {
-		WebElement menuElement = Hooks.driver.findElement(By.xpath("//a[.//span[text()='" + menu + "']]"));
-		Hooks.actions.moveToElement(menuElement).perform();
+	    WebDriverWait wait = new WebDriverWait(Hooks.driver, Duration.ofSeconds(15));
+
+		 WebElement menuElement = wait.until(ExpectedConditions
+	                .visibilityOfElementLocated(By.xpath("//a[.//span[text()='" + menu + "']]")));		Hooks.actions.moveToElement(menuElement).perform();
 		Thread.sleep(5000);
 	}
 
 	@When("user clicks on {string} from the dropdown")
 	public void user_clicks_on_from_the_dropdown(String option) {
-		WebElement optionElement = Hooks.driver.findElement(By.xpath("//a[normalize-space()='" + option + "']"));
-		Hooks.actions.moveToElement(optionElement).click().perform();
+	    WebDriverWait wait = new WebDriverWait(Hooks.driver, Duration.ofSeconds(15));
+
+		WebElement optionElement = wait.until(ExpectedConditions
+                .elementToBeClickable(By.xpath("//a[normalize-space()='" + option + "']")));
+
+        // Move and click
+        Hooks.actions.moveToElement(optionElement).pause(Duration.ofMillis(300)).click().perform();
+		//		WebElement optionElement = Hooks.driver.findElement(By.xpath("//a[normalize-space()='" + option + "']"));
+		//Hooks.actions.moveToElement(optionElement).click().perform();
 
 	}
 

@@ -3,10 +3,11 @@ package com.fdmgroup.stepdefinitions;
 import java.io.File;
 import java.io.IOException;
 import org.openqa.selenium.io.FileHandler;
-
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import com.fdmgroup.pages.HomePage;
@@ -35,7 +36,7 @@ public class Hooks {
 	public static void init() {
 		driverUtilities = DriverUtilities.getInstance();
 		driver = driverUtilities.getDriver();
-		
+
 		
 		homePage = new HomePage(driver);
 		mortgagePage = new MortgagePage(driver);
@@ -51,6 +52,16 @@ public class Hooks {
 	    File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 	    File dest = new File("C:\\Users\\appun\\eclipse-workspace\\ScotiaBankProj\\src\\test\\resources\\images" + scenario.getName() + ".png");
 	    FileHandler.copy(src, dest);
+	}
+	
+	public void closeCookiesIfPresent(WebDriver driver) {
+	    try {
+	        WebElement acceptButton = driver.findElement(By.id("onetrust-accept-btn-handler"));
+	        acceptButton.click();
+	        Thread.sleep(1000);
+	    } catch (Exception e) {
+	        // Cookie banner not present, ignore
+	    }
 	}
 	
 	
