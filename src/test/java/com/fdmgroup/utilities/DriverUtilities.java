@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class DriverUtilities {
 	private static DriverUtilities driverUtilities;
 	private WebDriver webDriver;
@@ -42,6 +44,7 @@ public class DriverUtilities {
 
 		switch (driverName) {
 		case "Chrome":
+			WebDriverManager.chromedriver().setup();
 			this.webDriver = new ChromeDriver();
 			break;
 		case "Edge":
